@@ -1,0 +1,156 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Gradient color generator</title>
+
+    <style> 
+	    /* Styling body */
+	    body { 
+	       display: flex;
+	       flex-direction: column;
+	       font-family: roboto;
+	       text-align: center; 
+	       background-color:rgb(222, 225, 230);
+	       margin:0;
+	    }
+	    /* h1 tag text color */
+	    h1 { 
+	      color: rgb(222, 225, 230); 
+	      margin: 45px 0;
+	      font-size: 45px;
+	      text-shadow: #383838 0 0 2px, #383838 2px 2px 1px;
+	    } 
+	    h3{
+	    	color: grey;
+	    	border: 1px solid rgb(222, 225, 230);;
+	    	border-left:none;
+	    	border-right: none;
+	    	padding: 10px;
+	    	margin: 15px 0;
+	    	font-weight: lighter;
+	    	font-family: consolas;
+	    	background-color:#f0f0f0;
+	    }
+	    .change{
+	        text-align: center; 
+	        background: linear-gradient(to right, rgb(251, 255, 0), rgb(132, 148, 154));
+	        width: 100%;
+	        height: 50vh; 
+	        margin: 15px 0;
+	        border: 1px solid black;
+	        border-left:none;
+	    	border-right: none;
+	    }
+	    .color1{
+	    	margin: 15px 0;
+	    	border: transparent;
+	    	height: 40px;
+	    	width: 80px;
+	    	background-color: transparent;
+	    	border-radius: 50%;
+	    }
+	    .color2{
+	    	margin: 15px 0;
+	    	border: transparent;
+	    	height: 40px;
+	    	width: 80px;
+	    	background-color: transparent;
+	    	border-radius: 50%;
+	    }
+	    .degInput{
+	    	margin: 15px 3px;
+	    	border: 1px solid gray;
+	    	height: 28px;
+	    	width: 160px;
+	    	background-color: transparent;
+	    	text-align: center;
+	    	font-size: 16px;
+	    	font-family: Lato;
+	    	color: grey;
+	    }
+
+	    .wrapInputs{
+	    	display: flex;
+	    	justify-content: center;
+	    	align-items: center;
+	    	margin: 0;
+	    }
+
+	    footer{
+	    	width: 100%;
+	    	background: black;
+	    	position: absolute;
+	    	bottom: 0vh;
+	    	border-top: 1px solid gray;
+	    	padding: 10px 0;
+	    	color:white;
+	    }
+
+    </style>  
+
+</head> 
+<body>
+
+    <h1>RTS Gradient Genarator</h1> 
+    <h3>Gradient color generator</h3> 
+    <!-- <p>Current Colors for Gradient Background</p>  -->
+    <!-- Default color for gradient -->
+    <div class="wrapInputs">
+	    <input class="color1" type="color" value="#0000ff" /> 
+	    <input class="color2" type="color" value="#add8e6" />
+	    <input class="degInput" type = "text" placeholder="Degree/Direction" />
+	</div>
+    <div class="change"></div>
+
+    <footer>Copyright 2021 @ Shihab Uddin</footer>
+
+    <script> 
+    	var  title = document.querySelector("h1")
+	    var css = document.querySelector("h3"); 
+	    var color1 = document.querySelector(".color1"); 
+	    var color2 = document.querySelector(".color2"); 
+	    var body = document.querySelector(".change"); 
+	    var degInput = document.querySelector(".degInput");
+	    var direction =null;
+
+	    color1.value = "#0A0A05"
+	    color2.value = "#D12929"
+	    
+
+	    // Changing color for the gradient 
+	    function changeGradient() { 
+	    	if (degInput.value == ""){
+	    		direction = 'to top'
+	    		prev=direction
+	    	}
+	    	else{
+	    		direction = degInput.value
+	    		if (direction == "to left" || direction == "to right" || direction == "to top" || direction == "to bottom"){
+	    			// console.log("got specific direction", direction)
+	    			prev = direction
+	    		}
+	    		else{
+	    			if (Number(direction)){
+	    				direction += "deg"
+	    				prev = direction
+	    			}
+	    			else{
+	    				// console.log("Not Number")
+	    				direction = prev
+	    			}
+	    		}
+	    	}
+
+	        body.style.background = "linear-gradient(" +direction +", " + color1.value + ", " + color2.value + ")"; 
+	        // css.textContent = body.style.background + ";"; 
+	        css.innerHTML = `<span style='color:darkblue'>linear-gradient</span> (<span style='color:#5dcaf8'>${direction}</span>, <span style='color:${color1.value}'> ${color1.value} </span>, <span style='color:${color2.value}'> ${color2.value} </span>);`;
+	    } 
+
+	    changeGradient();
+
+	    color1.addEventListener("input", changeGradient); 
+	    color2.addEventListener("input", changeGradient); 
+	    degInput.addEventListener("input", changeGradient)
+	</script> 
+</body> 
+</html> 
